@@ -16,14 +16,15 @@ public class IterativeDeepeningDFSearch {
 
     // Depth-limited search within a specified depth limit
     static List<String> depthLimitedSearch(Map<String, List<String>> adjacencyList, String current, String end, int depth) {
-        return depthLimitedSearch(adjacencyList, current, end, depth, new HashSet<>());
+        return depthLimitedSearch(adjacencyList, current, end, depth, new HashSet<>(), new ArrayList<>());
     }
 
     // Helper function for depth-limited search
-    static List<String> depthLimitedSearch(Map<String, List<String>> adjacencyList, String current, String end, int depth, Set<String> visited) {
+    static List<String> depthLimitedSearch(Map<String, List<String>> adjacencyList, String current, String end, int depth, Set<String> visited, List<String> path) {
         // If current node is the goal, return the path containing only the goal node
         if (current.equals(end)) {
-            return Arrays.asList(end);
+            path.add(end);
+            return path;
         }
 
         // If depth limit reached or node has been visited, return null indicating no path found
@@ -37,10 +38,11 @@ public class IterativeDeepeningDFSearch {
         for (String neighbor : adjacencyList.get(current)) {
             if (!visited.contains(neighbor)) {
                 // Recursively perform depth-limited search on unvisited neighbors
-                List<String> path = depthLimitedSearch(adjacencyList, neighbor, end, depth - 1, visited);
-                if (path != null) {
-                    path.add(0, current); // Prepend the current node to the found path
-                    return path; // Return the found path
+                List<String> newPath = new ArrayList<>(path);
+                List<String> result = depthLimitedSearch(adjacencyList, neighbor, end, depth - 1, visited, newPath);
+                if (result != null) {
+                    result.add(0, current); // Prepend the current node to the found path
+                    return result; // Return the found path
                 }
             }
         }
