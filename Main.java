@@ -46,90 +46,6 @@ public class Main {
         coordinatesReader.close();
     }
 
-    // Function to perform breadth-first search
-    static List<String> breadthFirstSearch(String start, String end) {
-        Map<String, String> parentMap = new HashMap<>();
-        Queue<String> queue = new LinkedList<>();
-        Set<String> visited = new HashSet<>();
-
-        queue.add(start);
-        visited.add(start);
-
-        while (!queue.isEmpty()) {
-            String current = queue.poll();
-            if (current.equals(end)) {
-                return getPath(parentMap, start, end);
-            }
-            for (String neighbor : adjacencyList.get(current)) {
-                if (!visited.contains(neighbor)) {
-                    queue.add(neighbor);
-                    visited.add(neighbor);
-                    parentMap.put(neighbor, current);
-                }
-            }
-        }
-        return null; // No path found
-    }
-
-    // Function to perform depth-first search
-    static List<String> depthFirstSearch(String start, String end) {
-        Map<String, String> parentMap = new HashMap<>();
-        Stack<String> stack = new Stack<>();
-        Set<String> visited = new HashSet<>();
-
-        stack.push(start);
-        visited.add(start);
-
-        while (!stack.isEmpty()) {
-            String current = stack.pop();
-            if (current.equals(end)) {
-                return getPath(parentMap, start, end);
-            }
-            for (String neighbor : adjacencyList.get(current)) {
-                if (!visited.contains(neighbor)) {
-                    stack.push(neighbor);
-                    visited.add(neighbor);
-                    parentMap.put(neighbor, current);
-                }
-            }
-        }
-        return null; // No path found
-    }
-
-    // Function to perform iterative deepening depth-first search
-    static List<String> iterativeDeepeningDFSearch(String start, String end) {
-        // Implementation of ID-DFS algorithm
-        // Not implemented in this example
-        return null;
-    }
-
-    // Function to perform best-first search
-    static List<String> bestFirstSearch(String start, String end) {
-        // Implementation of best-first search algorithm
-        // Not implemented in this example
-        return null;
-    }
-
-    // Function to perform A* search
-    static List<String> aStarSearch(String start, String end) {
-        // Implementation of A* search algorithm
-        // Not implemented in this example
-        return null;
-    }
-
-    // Function to get path from parent map
-    static List<String> getPath(Map<String, String> parentMap, String start, String end) {
-        List<String> path = new ArrayList<>();
-        String current = end;
-        while (!current.equals(start)) {
-            path.add(current);
-            current = parentMap.get(current);
-        }
-        path.add(start);
-        Collections.reverse(path);
-        return path;
-    }
-
     public static void main(String[] args) {
         try {
             // Load data from files
@@ -157,19 +73,19 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    path = breadthFirstSearch(startTown, endTown);
+                    path = BreadthFirstSearch.breadthFirstSearch(adjacencyList, startTown, endTown);
                     break;
                 case 2:
-                    path = depthFirstSearch(startTown, endTown);
+                    path = DepthFirstSearch.depthFirstSearch(adjacencyList, startTown, endTown);
                     break;
                 case 3:
-                    path = iterativeDeepeningDFSearch(startTown, endTown);
+                    path = IterativeDeepeningDFSearch.iterativeDeepeningDFSearch(adjacencyList, startTown, endTown);
                     break;
                 case 4:
-                    path = bestFirstSearch(startTown, endTown);
+                    path = BestFirstSearch.bestFirstSearch(adjacencyList, coordinatesMap, startTown, endTown);
                     break;
                 case 5:
-                    path = aStarSearch(startTown, endTown);
+                    path = AStarSearch.aStarSearch(adjacencyList, coordinatesMap, startTown, endTown);
                     break;
                 default:
                     System.out.println("Invalid choice");
@@ -178,16 +94,17 @@ public class Main {
             long endTime = System.nanoTime();
             long duration = (endTime - startTime) / 1000; // Time in microseconds
 
-            if (path != null) {
-                System.out.println("Route found:");
-                for (String city : path) {
-                    System.out.println(city);
-                }
-            } else {
-                System.out.println("Route not found.");
-            }
-
+            // Print the path with arrows between cities
             System.out.println("Time taken: " + duration + " microseconds");
+            if (path != null) {
+                System.out.print("Route found: ");
+                for (int i = 0; i < path.size() - 1; i++) {
+                    System.out.print(path.get(i) + " -> ");
+                }
+                System.out.println(path.get(path.size() - 1));
+            } else {
+                System.out.println("No route found.");
+            }
 
             // Calculate and display memory usage
             Runtime runtime = Runtime.getRuntime();
