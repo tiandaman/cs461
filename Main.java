@@ -1,6 +1,7 @@
 //prompted from ChatGPT
 /* Write me a java program: that times each of the searches in microseconds, and calculates memory usage for each.
 
+
 breadth-first search
 depth-first search
 ID-DFS search
@@ -25,7 +26,6 @@ measure and print the total time needed to find the route (and include a time-ou
 calculate and display the total distance (node to node) for the cities visited on the route selected.
 (opt) determine the total memory used (scale of the arrays) to find the solution.
 Return to the search method selection and allow a new method to be selected for comparison. */
-
 import java.util.*;
 import java.io.*;
 
@@ -82,7 +82,7 @@ public class Main {
             Scanner scanner = new Scanner(System.in);
             boolean continueInput = true;
 
-            while (continueInput) {
+            do {
                 // Prompt user for input
                 System.out.print("Enter starting town: ");
                 String startTown = scanner.nextLine();
@@ -147,7 +147,7 @@ public class Main {
                 System.out.print("Do you want to input another city? (yes/no): ");
                 String input = scanner.nextLine();
                 continueInput = input.equalsIgnoreCase("yes");
-            }
+            } while (continueInput);
 
             scanner.close();
 
