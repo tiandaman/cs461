@@ -1,14 +1,13 @@
 //prompted from ChatGPT
 /* Write me a java program: that times each of the searches in microseconds, and calculates memory usage for each.
 
+create a java file for each of the following tied to a main: 
 
 breadth-first search
 depth-first search
 ID-DFS search
-Heuristic Approaches
 best-first search
 A* search
-(5 Total Methods)
 
 ◦ A file (CSV) listing each town (pair) as a related adjacent node with examples provided *insert adjacencies.txt and the coordinates.csv files here for chtgpt to reference* */
 
