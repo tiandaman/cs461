@@ -10,22 +10,8 @@ best-first search
 A* search
 (5 Total Methods)
 
-◦ A file (CSV) listing each town (pair) as a related adjacent node. 
-# be aware adjacency is symmetric: If A is adjacent to B, then B is adjacent to A. This may not be
-listed comprehensively if your method requires that bidirectional connections be explicitly stated, you may need to generate additional pairs for the symmetrical connection to work. {That is, tell the program that it’s possible to go from listed A as adjacent to B or listed B as adjacent to A.}
---> Be sure to take this into account when setting up your program’s data structures. If adjacency is listed
-in either direction, it should be considered present in both directions.
-• Your program should:
-Ask the user for their starting and ending towns, making sure they’re both towns in the database.
-Ask them then to select the search method they wish to use to find a route to the destination.
-If that route exists, the program should then print the route the method found in order, from origin to destination.
-If you want to get fancy, you might see how the route generated looks as a map (either a map of connected states as we looked at in class, or as a projection in 2D space based on location and connectivity).
-Note that your database is very limited, and many of the real-world roads are left out for simplicity*.
-Your program should also: 
-measure and print the total time needed to find the route (and include a time-out).
-calculate and display the total distance (node to node) for the cities visited on the route selected.
-(opt) determine the total memory used (scale of the arrays) to find the solution.
-Return to the search method selection and allow a new method to be selected for comparison. */
+◦ A file (CSV) listing each town (pair) as a related adjacent node with examples provided *insert adjacencies.txt and the coordinates.csv files here for chtgpt to reference* */
+
 import java.util.*;
 import java.io.*;
 
